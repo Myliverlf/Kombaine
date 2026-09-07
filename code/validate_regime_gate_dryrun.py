@@ -57,7 +57,7 @@ def _build_candidates_from_signal_pool(
     """Построить кандидатов из signal_pool для A/B теста."""
     risk = config.get("risk", {})
     excluded = config.get("excluded", [])
-    deposit_rub = config.get("deposit_rub", 21281)
+    deposit_rub = config.get("deposit_rub", 100000)
     risk_per_trade_pct = risk.get("risk_per_trade_pct", 2.7)
 
     candidates = []
@@ -158,7 +158,7 @@ def main() -> bool:
     excluded = config.get("excluded", [])
     max_slots = risk.get("max_slots", 3)
     max_contracts = risk.get("max_contracts_per_entry", 1)
-    deposit_rub = config.get("deposit_rub", 21281)
+    deposit_rub = config.get("deposit_rub", 100000)
     risk_per_trade_pct = risk.get("risk_per_trade_pct", 2.7)
     risk_per_trade_rub = deposit_rub * risk_per_trade_pct / 100.0
 

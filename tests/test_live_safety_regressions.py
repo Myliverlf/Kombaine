@@ -15,12 +15,12 @@ def test_normalize_fill_price_scales_gazp_like_quote():
 def test_futures_equity_is_deposit_plus_unrealized_pnl(monkeypatch):
     from core.engine import Engine
     eng = Engine()
-    eng.cfg.deposit_rub = 21281
+    eng.cfg.deposit_rub = 100000
     class DummyClient: pass
     monkeypatch.setattr(eng, 'ensure_spec', lambda ticker: type('S', (), {'point_value': 1.0})())
     pnl = eng.futures_unrealized_pnl({'GAZP': {'qty': -1, 'avg_price': 82.78, 'last_price': 82.23}})
     assert pnl == pytest.approx(0.55)
-    assert eng.cfg.deposit_rub + pnl == pytest.approx(21281.55)
+    assert eng.cfg.deposit_rub + pnl == pytest.approx(100000.55)
 
 
 def test_portfolio_slots_have_positive_go_and_one_ticker_one_open_slot():

@@ -168,7 +168,7 @@ def valid_2slot_portfolio() -> dict:
                 "n_trades": 5,
             },
         },
-        "peak_equity": 21281.0,
+        "peak_equity": 100000.0,
         "halted": False,
         "halt_reason": None,
     }
@@ -210,7 +210,7 @@ def dead_slot_portfolio() -> dict:
                 "n_trades": 0,
             },
         },
-        "peak_equity": 21281.0,
+        "peak_equity": 100000.0,
         "halted": False,
         "halt_reason": None,
     }
@@ -253,7 +253,7 @@ def portfolio_with_open_and_dupes() -> dict:
                 "n_trades": 5,
             },
         },
-        "peak_equity": 21281.0,
+        "peak_equity": 100000.0,
         "halted": False,
         "halt_reason": None,
     }
@@ -296,7 +296,7 @@ def clean_3slot_portfolio() -> dict:
                 "n_trades": 7,
             },
         },
-        "peak_equity": 21281.0,
+        "peak_equity": 100000.0,
         "halted": False,
         "halt_reason": None,
     }

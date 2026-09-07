@@ -20,7 +20,7 @@ def make_portfolio(slots_data=None):
         slots_data = {}
     return {
         "slots": slots_data,
-        "peak_equity": 21281.0,
+        "peak_equity": 100000.0,
         "halted": False,
         "halt_reason": None,
     }

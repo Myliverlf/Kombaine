@@ -191,7 +191,7 @@ def validate_on_15m(ticker: str, strategy: str, params: dict) -> dict | None:
                 initial_margin_on_buy=go, initial_margin_on_sell=go)
     spec = _SPEC_CACHE[api_ticker]
     # честный risk-sizing: риск 2.7% депозита на сделку, ГО ограничено бюджетом
-    deposit = 21281.0
+    deposit = 100000.0
     risk_rub = deposit * 0.027
     go_budget = deposit * 0.40 * 0.70   # 40% бюджет, 30% резерв на маржин-колл
     max_contracts = max(1, int(go_budget // spec.active_margin))

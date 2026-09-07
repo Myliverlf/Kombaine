@@ -280,7 +280,7 @@ def main() -> bool:
             "max_contracts_per_entry": max_contracts,
         },
         "risk_per_trade_pct": risk.get("risk_per_trade_pct", 2.7),
-        "deposit_rub": config.get("deposit_rub", 21281),
+        "deposit_rub": config.get("deposit_rub", 100000),
     }
 
     selected = select_live_slots(candidates, cfg_alloc, regime_snapshot)

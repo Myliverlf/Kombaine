@@ -78,7 +78,7 @@ def data_file(ticker:str, tf:str) -> pathlib.Path:
     return DATA / f'{ticker}_60d_{tf}_continuous.csv'
 
 curves=[]; table=[]
-initial_cash=float(config.get('deposit_rub') or 21281)
+initial_cash=float(config.get('deposit_rub') or 100000)
 for row in live_ready:
     sid=row['strategy_id']; rec=registry['strategies'][sid]
     ticker=rec['ticker']; strategy=rec['strategy']

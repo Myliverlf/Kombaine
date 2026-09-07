@@ -379,7 +379,7 @@ def choose_representatives(
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--initial-cash", type=float, default=21281.0)
+    ap.add_argument("--initial-cash", type=float, default=100000.0)
     ap.add_argument("--level-corr", type=float, default=0.88)
     ap.add_argument("--return-corr", type=float, default=0.25)
     ap.add_argument("--same-ticker-level-corr", type=float, default=0.84)

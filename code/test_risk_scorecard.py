@@ -32,9 +32,9 @@ from risk_scorecard import (
 def _base_config(**overrides) -> dict:
     """Базовый конфиг, совпадающий с config.json."""
     defaults = {
-        "go_budget_rub": 21281 * 50 / 100,  # 10640.5
+        "go_budget_rub": 100000 * 50 / 100,  # 10640.5
         "delta_band_pct": 30,
-        "deposit_rub": 21281,
+        "deposit_rub": 100000,
         "portfolio_stop_drawdown_pct": 25,
         "signal_max_age_minutes": 16,
         "max_slots": 3,
@@ -129,13 +129,13 @@ class TestMonotonicRiskScore:
         cfg = _base_config()
 
         good = build_scorecard(clean_portfolio, cfg,
-                               equity=21281 + 150, peak_equity=22000)
+                               equity=100000 + 150, peak_equity=22000)
 
         worse = dict(clean_portfolio)
         worse["slot_A_1"] = _slot("A", go_rub=3000, pnl=-800, peak_pnl=0,
                                   direction="LONG", signal_age_sec=120)
         bad = build_scorecard(worse, cfg,
-                              equity=21281 - 750, peak_equity=22000)
+                              equity=100000 - 750, peak_equity=22000)
 
         assert bad["risk_score"] >= good["risk_score"], (
             "risk_score должен расти при ухудшении: good=%.2f bad=%.2f"
@@ -144,7 +144,7 @@ class TestMonotonicRiskScore:
 
     def test_perfect_portfolio_low_score(self):
         """Без слотов — минимальный score."""
-        result = build_scorecard({}, _base_config(), equity=21281, peak_equity=21281)
+        result = build_scorecard({}, _base_config(), equity=100000, peak_equity=100000)
         assert result["risk_score"] < 20, (
             "Пустой портфель должен иметь низкий score: %.2f" % result["risk_score"]
         )
@@ -287,33 +287,33 @@ class TestDrawdown:
 
     def test_portfolio_stop_veto(self):
         """Просадка >= 25% → VETO."""
-        # equity=15900 → DD = (21281-15900)/21281 = 25.28% >= 25%
+        # equity=15900 → DD = (100000-15900)/100000 = 25.28% >= 25%
         slots = {"s1": _slot("A", pnl=-5000, peak_pnl=0, direction="LONG")}
         result = build_scorecard(slots, _base_config(),
-                                 equity=15900, peak_equity=21281)
+                                 equity=15900, peak_equity=100000)
         assert result["components"]["drawdown"]["status"] == STATUS_VETO
 
     def test_reduce_tier(self):
         """Просадка 22% (80%-99% стопа 25%) → REDUCE."""
-        # DD = (21281-16600)/21281 = 21.99% → >= 25*0.80=20% → REDUCE
+        # DD = (100000-16600)/100000 = 21.99% → >= 25*0.80=20% → REDUCE
         slots = {"s1": _slot("A", pnl=-4681, peak_pnl=0, direction="LONG")}
         result = build_scorecard(slots, _base_config(),
-                                 equity=16600, peak_equity=21281)
+                                 equity=16600, peak_equity=100000)
         assert result["components"]["drawdown"]["status"] == STATUS_REDUCE
 
     def test_warn_tier(self):
         """Просадка 15% (40%-79% стопа 25%) → WARN."""
-        # DD = (21281-18100)/21281 = 14.94% → >= 25*0.40=10% → WARN
+        # DD = (100000-18100)/100000 = 14.94% → >= 25*0.40=10% → WARN
         slots = {"s1": _slot("A", pnl=-3181, peak_pnl=0, direction="LONG")}
         result = build_scorecard(slots, _base_config(),
-                                 equity=18100, peak_equity=21281)
+                                 equity=18100, peak_equity=100000)
         assert result["components"]["drawdown"]["status"] == STATUS_WARN
 
     def test_no_drawdown_ok(self):
         """Нет просадки → OK."""
         slots = {"s1": _slot("A", pnl=0, peak_pnl=0, direction="LONG")}
         result = build_scorecard(slots, _base_config(),
-                                 equity=21281, peak_equity=21281)
+                                 equity=100000, peak_equity=100000)
         assert result["components"]["drawdown"]["status"] == STATUS_OK
 
 
@@ -365,7 +365,7 @@ class TestFullScorecard:
         """Чистый портфель → ALLOW или REDUCE (2/3 slots = WARN)."""
         cfg = _base_config()
         result = build_scorecard(clean_portfolio, cfg,
-                                 equity=21281 + 150, peak_equity=22000)
+                                 equity=100000 + 150, peak_equity=22000)
         # 2/3 active slots → slots=WARN → verdict=REDUCE (ожидаемо)
         assert result["verdict"] in ("ALLOW", "REDUCE")
         assert result["risk_score"] < 30
@@ -426,9 +426,9 @@ def json_portfolio():
     return {
         "slots": adapted,
         "config": {
-            "go_budget_rub": raw.get("deposit_rub", 21281) * 50 / 100,
+            "go_budget_rub": raw.get("deposit_rub", 100000) * 50 / 100,
             "delta_band_pct": 30,
-            "deposit_rub": raw.get("deposit_rub", 21281),
+            "deposit_rub": raw.get("deposit_rub", 100000),
             "portfolio_stop_drawdown_pct": 25,
             "signal_max_age_minutes": 16,
             "max_slots": raw.get("max_slots", 3),

@@ -243,7 +243,7 @@ class TestT7BrokerAccount:
         cfg = _load_config()
         assert "account" in cfg
         assert "id" in cfg["account"]
-        assert cfg["account"]["id"] == "2042640199"
+        assert cfg["account"]["id"] == "0000000000"
 
     def test_broker_tinkoff(self):
         """Broker must be tinkoff."""

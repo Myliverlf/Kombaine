@@ -212,7 +212,7 @@ def clean_portfolio_fixture() -> dict:
                 "open_position": None,
             },
         },
-        "peak_equity": 21281.0,
+        "peak_equity": 100000.0,
         "halted": False,
         "halt_reason": None,
     }
@@ -238,7 +238,7 @@ def single_contract_fixture() -> dict:
                 "open_position": None,
             },
         },
-        "peak_equity": 21281.0,
+        "peak_equity": 100000.0,
         "halted": False,
         "halt_reason": None,
     }

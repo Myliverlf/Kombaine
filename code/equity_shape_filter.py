@@ -189,7 +189,7 @@ def render_md(payload: dict[str, Any]) -> str:
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--initial-cash", type=float, default=21281.0)
+    ap.add_argument("--initial-cash", type=float, default=100000.0)
     args = ap.parse_args()
     REPORT_DIR.mkdir(parents=True, exist_ok=True)
     reg = StrategyRegistry.load()

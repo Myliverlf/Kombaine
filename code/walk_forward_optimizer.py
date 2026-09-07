@@ -158,7 +158,7 @@ def _select_with_weights(
     max_slots = cfg.get("risk", {}).get("max_slots", 3)
     max_contracts = cfg.get("risk", {}).get("max_contracts_per_entry", 1)
     risk_per_trade_pct = cfg.get("risk_per_trade_pct", 2.7)
-    deposit_rub = cfg.get("deposit_rub", 21281)
+    deposit_rub = cfg.get("deposit_rub", 100000)
     risk_per_trade_rub = deposit_rub * risk_per_trade_pct / 100.0
 
     filtered = [c for c in candidates if c.get("ticker") not in excluded]
@@ -510,7 +510,7 @@ def _demo() -> None:
         "excluded": ["RI"],
         "risk": {"max_slots": 3, "max_contracts_per_entry": 1},
         "risk_per_trade_pct": 2.7,
-        "deposit_rub": 21281,
+        "deposit_rub": 100000,
     }
 
     regime = {

@@ -17,7 +17,7 @@ config=json.loads((ROOT/'config.json').read_text())
 
 decisions={r.get('strategy_id'):r.get('decision') for r in (pickup.get('would_promote') or [])+(pickup.get('vetoed_top') or [])}
 rows=[]
-initial=float(config.get('deposit_rub') or 21281)
+initial=float(config.get('deposit_rub') or 100000)
 for sid, rec in pool.items():
     m=rec.get('metrics') or {}
     tf=str(m.get('timeframe') or ('15m' if '15m' in sid else '1h'))

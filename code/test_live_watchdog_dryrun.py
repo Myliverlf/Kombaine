@@ -44,7 +44,7 @@ def test_pass_fixture_has_no_issues(tmp_path: Path) -> None:
     assert gazp_slot["direction"] == "SHORT"
     assert gazp_slot["entry_price"] == pytest.approx(82.78)
     assert gazp_slot["sl_px"] > gazp_slot["entry_price"] > gazp_slot["tp_px"]
-    assert payload["portfolio"]["deposit_rub"] == pytest.approx(21281.0)
+    assert payload["portfolio"]["deposit_rub"] == pytest.approx(100000.0)
 
 
 def test_detects_orphan_scale_and_inactive_timer(tmp_path: Path) -> None:

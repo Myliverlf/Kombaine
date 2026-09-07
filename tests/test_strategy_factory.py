@@ -74,7 +74,7 @@ def tmp_base(tmp_path):
     (base / "config.json").write_text(json.dumps({
         "mode": "paper",
         "paper_first": True,
-        "deposit_rub": 21281,
+        "deposit_rub": 100000,
         "universe": ["BR", "GAZP", "LKOH", "SBER", "Si"],
         "excluded": ["RI"],
         "risk": {
@@ -98,7 +98,7 @@ def tmp_base(tmp_path):
             "signal_max_age_minutes": 16,
             "max_contracts_per_entry": 1,
         },
-        "account": {"id": "2042640199", "broker": "tinkoff", "env_token": "TINKOFF_TOKEN"},
+        "account": {"id": "0000000000", "broker": "tinkoff", "env_token": "TINKOFF_TOKEN"},
         "engine": {
             "sl_atr_mult": 2.0,
             "tp_atr_mult": 3.0,

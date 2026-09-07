@@ -1,8 +1,8 @@
 {
   "halted": false,
   "halt_reason": null,
-  "peak_equity": 21329.0,
-  "deposit_rub": 21281.0,
+  "peak_equity": 100000.0,
+  "deposit_rub": 100000.0,
   "slots": {
     "slot_GAZP_56487": {
       "ticker": "GAZP",

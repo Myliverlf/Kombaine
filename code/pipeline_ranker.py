@@ -102,7 +102,7 @@ def run_pipeline(
     max_slots = risk_cfg.get("max_slots", 3)
     max_contracts = risk_cfg.get("max_contracts_per_entry", 1)
     risk_per_trade_pct = risk_cfg.get("risk_per_trade_pct", 2.7)
-    deposit_rub = config.get("deposit_rub", 21281)
+    deposit_rub = config.get("deposit_rub", 100000)
 
     n_candidates = len(candidates)
 

@@ -38,7 +38,7 @@ No leverage, no averaging down, no pyramiding.
 
 ### Broker Truth Closure
 - READ_ONLY broker connection achieved via tinkoff-invest SDK
-- Account 2042640199 verified (Брокерский счёт, opened 2020-09-15)
+- Account [redacted] verified (Брокерский счёт)
 - Portfolio: 4 positions (RUB cash + USD + EUR + LKOH 4 shares)
 - Open orders: 0
 - Mutating calls: 0
@@ -58,7 +58,7 @@ NO_LIVE_STRATEGY_ELIGIBLE — no strategy has sufficient walk-forward evidence
 - Owner capital decision codified ✅
 - LIVE_RISK_V1 versioned and stored ✅
 - Broker truth proven (READ_ONLY) ✅
-- Account equity verified (~21,040 RUB) ✅
+- Account equity verified (amount redacted) ✅
 - Reconciliation: DEGRADED (expected — external position) ✅
 - Position state: NON_FLAT (known, documented) ✅
 - Data certification: GAZP/SBER certified, LKOH conditional ✅

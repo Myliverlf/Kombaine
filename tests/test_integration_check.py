@@ -72,7 +72,7 @@ def clean_3slots() -> dict:
             "s3": {"ticker": "SBER", "strategy": "mean_reversion", "contracts": 1,
                     "pnl_rub": -20.0, "open_position": None},
         },
-        "peak_equity": 21281.0,
+        "peak_equity": 100000.0,
         "halted": False,
         "halt_reason": None,
     }

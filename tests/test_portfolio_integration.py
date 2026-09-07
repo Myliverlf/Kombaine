@@ -92,7 +92,7 @@ def paper_config_fixture() -> dict:
     return {
         "mode": "paper",
         "paper_first": True,
-        "deposit_rub": 21281,
+        "deposit_rub": 100000,
         "risk": {
             "max_slots": 3,
             "max_contracts_per_entry": 1,
@@ -274,7 +274,7 @@ class TestOverloadedPortfolioValidation:
                 "s2": {"ticker": "GAZP", "strategy": "ft_bband_rsi", "contracts": 1, "pnl_rub": 50.0, "open_position": None},
                 "s3": {"ticker": "SBER", "strategy": "mean_reversion", "contracts": 1, "pnl_rub": -20.0, "open_position": None},
             },
-            "peak_equity": 21281.0,
+            "peak_equity": 100000.0,
             "halted": False,
             "halt_reason": None,
         }

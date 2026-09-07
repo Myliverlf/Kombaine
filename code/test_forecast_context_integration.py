@@ -99,7 +99,7 @@ def sample_config():
             "max_slots": 3,
             "max_contracts_per_entry": 1,
             "risk_per_trade_pct": 2.7,
-            "deposit_rub": 21281,
+            "deposit_rub": 100000,
             "go_budget_pct": 50,
             "portfolio_stop_drawdown_pct": 25,
             "delta_band_pct": 30,
@@ -109,7 +109,7 @@ def sample_config():
             "exposure": 20,
             "drawdown": 20,
         },
-        "deposit_rub": 21281,
+        "deposit_rub": 100000,
     }
 
 
@@ -335,7 +335,7 @@ class TestPipelineConstraints:
                 "excluded": ["RI"],
                 "risk": {"max_slots": 3, "max_contracts_per_entry": 1},
                 "risk_per_trade_pct": 2.7,
-                "deposit_rub": 21281,
+                "deposit_rub": 100000,
             }
             selected = select_live_slots(candidates, cfg)
             assert len(selected) <= 3
@@ -352,7 +352,7 @@ class TestPipelineConstraints:
                 "excluded": ["RI"],
                 "risk": {"max_slots": 3, "max_contracts_per_entry": 1},
                 "risk_per_trade_pct": 2.7,
-                "deposit_rub": 21281,
+                "deposit_rub": 100000,
             }
             selected = select_live_slots(candidates, cfg)
             for s in selected:
@@ -370,7 +370,7 @@ class TestPipelineConstraints:
                 "excluded": ["RI"],
                 "risk": {"max_slots": 3, "max_contracts_per_entry": 1},
                 "risk_per_trade_pct": 2.7,
-                "deposit_rub": 21281,
+                "deposit_rub": 100000,
             }
             selected = select_live_slots(candidates, cfg)
             tickers = [s["ticker"] for s in selected]

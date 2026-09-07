@@ -75,7 +75,7 @@ def cfg_allocator():
         "excluded": ["RI"],
         "risk": {"max_slots": 3, "max_contracts_per_entry": 1},
         "risk_per_trade_pct": 2.7,
-        "deposit_rub": 21281,
+        "deposit_rub": 100000,
     }
 
 

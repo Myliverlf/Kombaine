@@ -37,7 +37,7 @@ sys.path.insert(0, str(COMBINE_DIR))
 def mock_engine():
     """Создаёт mock Engine-подобный объект с _equity методом."""
     class FakeCfg:
-        deposit_rub = 21281
+        deposit_rub = 100000
         sl_atr_mult = 2.0
         tp_atr_mult = 3.0
 
@@ -128,7 +128,7 @@ def config_fixture(tmp_path):
     """Создаёт temp config.json с risk params."""
     config = {
         "mode": "paper",
-        "deposit_rub": 21281,
+        "deposit_rub": 100000,
         "risk": {
             "max_slots": 3,
             "max_contracts_per_entry": 1,
@@ -149,18 +149,18 @@ class TestMockEquityFix:
     def test_mock_equity_accepts_three_args(self, mock_engine):
         from mock_equity_fix import mock_equity
         result = mock_equity(mock_engine, None, None)
-        assert result == 21281, "Expected deposit_rub=21281, got %s" % result
+        assert result == 100000, "Expected deposit_rub=100000, got %s" % result
 
     def test_mock_equity_accepts_positions_dict(self, mock_engine):
         from mock_equity_fix import mock_equity
         positions = {"slot_1": {"qty": 1, "direction": "LONG"}}
         result = mock_equity(mock_engine, None, positions)
-        assert result == 21281, "Expected deposit_rub=21281, got %s" % result
+        assert result == 100000, "Expected deposit_rub=100000, got %s" % result
 
     def test_mock_equity_backward_compat_two_args(self, mock_engine):
         from mock_equity_fix import mock_equity
         result = mock_equity(mock_engine, None)
-        assert result == 21281, "Expected deposit_rub=21281, got %s" % result
+        assert result == 100000, "Expected deposit_rub=100000, got %s" % result
 
     def test_apply_mock_equity_patch(self, mock_engine):
         from mock_equity_fix import apply_mock_equity
@@ -174,7 +174,7 @@ class TestMockEquityFix:
         apply_mock_equity(mock_engine)
         # Bound method: _equity(client, broker_positions=None)
         result = mock_engine._equity(None, None)
-        assert result == 21281
+        assert result == 100000
 
 
 # ── Test 2: portfolio max_slots enforcement ───────────────────────────

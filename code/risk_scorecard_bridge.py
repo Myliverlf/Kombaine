@@ -480,7 +480,7 @@ def build_scorecard(
             {"win_rate": candidate["win_rate"],
              "avg_win": candidate["avg_win"],
              "avg_loss": candidate["avg_loss"]},
-            risk_per_trade=config.get("deposit_rub", 21281) * 0.027,
+            risk_per_trade=config.get("deposit_rub", 100000) * 0.027,
         )
         composites.append(round(er, 4))
 

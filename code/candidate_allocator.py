@@ -43,7 +43,7 @@ def _cfg_for_allocator(config: dict) -> dict:
             "max_contracts_per_entry": risk.get("max_contracts_per_entry", 1),
         },
         "risk_per_trade_pct": risk.get("risk_per_trade_pct", 2.7),
-        "deposit_rub": config.get("deposit_rub", 21281),
+        "deposit_rub": config.get("deposit_rub", 100000),
     }
 
 
@@ -83,13 +83,13 @@ def select_live_slots(
         max_slots = cfg["risk"]["max_slots"]
         max_contracts = cfg["risk"]["max_contracts_per_entry"]
         risk_per_trade_pct = cfg.get("risk_per_trade_pct", 2.7)
-        deposit_rub = cfg.get("deposit_rub", 21281)
+        deposit_rub = cfg.get("deposit_rub", 100000)
     else:
         excluded = cfg.get("excluded", [])
         max_slots = cfg.get("max_slots", 3)
         max_contracts = cfg.get("max_contracts_per_entry", 1)
         risk_per_trade_pct = cfg.get("risk_per_trade_pct", 2.7)
-        deposit_rub = cfg.get("deposit_rub", 21281)
+        deposit_rub = cfg.get("deposit_rub", 100000)
 
     if regime_snapshot is None:
         regime_snapshot = {}
@@ -205,7 +205,7 @@ def _demo() -> None:
         "excluded": ["RI"],
         "risk": {"max_slots": 3, "max_contracts_per_entry": 1},
         "risk_per_trade_pct": 2.7,
-        "deposit_rub": 21281,
+        "deposit_rub": 100000,
     }
 
     regime = {

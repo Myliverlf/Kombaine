@@ -33,7 +33,7 @@ class TestBuildScorecardBridge:
         # Build a minimal slots_dict from portfolio_fixture + config
         now_ts = 1700000000.0
         risk_cfg = engine_config_fixture.get("risk", {})
-        deposit = engine_config_fixture.get("deposit_rub", 21281)
+        deposit = engine_config_fixture.get("deposit_rub", 100000)
 
         slots_dict = {
             "slot_LKOH_1234": {
@@ -164,7 +164,7 @@ class TestConstraintsEnforced:
 
         config = engine_config_fixture
         risk_cfg = config.get("risk", {})
-        deposit = config.get("deposit_rub", 21281)
+        deposit = config.get("deposit_rub", 100000)
         now_ts = 1700000000.0
 
         # 3 valid slots + 1 RI slot (should be excluded)

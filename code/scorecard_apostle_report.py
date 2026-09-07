@@ -155,7 +155,7 @@ def _dry_run() -> str:
     from risk_scorecard_bridge import build_scorecard
 
     now_ts = 1700000000.0
-    deposit = 21281
+    deposit = 100000
 
     slots_dict = {
         "slot_LKOH_1234": {

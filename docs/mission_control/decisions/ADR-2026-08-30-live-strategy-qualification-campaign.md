@@ -7,7 +7,7 @@
 
 ## Context
 
-Iteration 23B established broker truth, LIVE_RISK_V1, and verified account equity (~21,040 RUB).
+Iteration 23B established broker truth, LIVE_RISK_V1, and verified account equity (amount redacted).
 G4 remained FAIL: no live-eligible strategy existed. The system was NOT_READY.
 
 The directive for Iteration 23C was a bounded Mission Control qualification campaign to:

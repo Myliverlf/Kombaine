@@ -61,20 +61,20 @@ def patched_apply_patches(eng) -> dict:
 if __name__ == "__main__":
     # Проверяем что мок принимает 3 аргумента (self + client + broker_positions)
     class FakeConfig:
-        deposit_rub = 21281
+        deposit_rub = 100000
 
     class FakeEngine:
         cfg = FakeConfig()
 
     eng = FakeEngine()
     result = mock_equity(eng, None, None)
-    assert result == 21281, "mock_equity(eng, None, None) expected 21281, got %s" % result
+    assert result == 100000, "mock_equity(eng, None, None) expected 100000, got %s" % result
 
     result2 = mock_equity(eng, None, {"pos1": {"qty": 1}})
-    assert result2 == 21281, "mock_equity(eng, None, dict) expected 21281, got %s" % result2
+    assert result2 == 100000, "mock_equity(eng, None, dict) expected 100000, got %s" % result2
 
     result3 = mock_equity(eng, None)
-    assert result3 == 21281, "mock_equity(eng, None) expected 21281, got %s" % result3
+    assert result3 == 100000, "mock_equity(eng, None) expected 100000, got %s" % result3
 
     print("OK: mock_equity accepts 3 args (self, client, broker_positions=None)")
     print("OK: mock_equity accepts 2 args (self, client) — backward compat")

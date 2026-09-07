@@ -23,7 +23,7 @@ def engine_config_fixture() -> dict:
     return {
         "mode": "paper",
         "paper_first": True,
-        "deposit_rub": 21281,
+        "deposit_rub": 100000,
         "risk": {
             "risk_per_trade_pct": 2.7,
             "go_budget_pct": 50,

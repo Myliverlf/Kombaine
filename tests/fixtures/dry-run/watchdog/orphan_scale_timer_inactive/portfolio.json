@@ -2,7 +2,7 @@
   "halted": true,
   "halt_reason": "risk_guard_trip",
   "peak_equity": 0.0,
-  "deposit_rub": 21281.0,
+  "deposit_rub": 100000.0,
   "slots": {
     "slot_GAZP_dup_a": {
       "ticker": "GAZP",

@@ -8,7 +8,7 @@
 - Experiments used: 24
 - Data freeze: e516e61abe1db67b
 - Universe: BR, GAZP, LKOH, SBER, Si
-- Account: 21281 RUB (paper)
+- Account: paper (amount redacted)
 
 ## Results
 

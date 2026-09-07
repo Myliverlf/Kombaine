@@ -64,7 +64,7 @@ def mixed_candidates():
 def base_config():
     """Minimal config matching config.json structure."""
     return {
-        "deposit_rub": 21281,
+        "deposit_rub": 100000,
         "excluded": ["RI"],
         "risk": {
             "max_slots": 3,
