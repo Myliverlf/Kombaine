@@ -13,6 +13,8 @@
 
 ![Kombaine agent flow](assets/kombaine-loop.gif)
 
+Watch the 90-second promo video (MP4): [kombaine-promo.mp4](https://github.com/Myliverlf/Kombaine/releases/download/v1.0.0/kombaine-promo.mp4) · full GIF: [kombaine-promo-full.gif](https://github.com/Myliverlf/Kombaine/releases/download/v1.0.0/kombaine-promo-full.gif) · [release page](https://github.com/Myliverlf/Kombaine/releases/tag/v1.0.0)
+
 ---
 
 ## Key Features
