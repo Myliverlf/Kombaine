@@ -1,46 +1,85 @@
-# Kombaine — Quant Strategy Combine
+# Комбайн (Kombaine) — автономная система исследования и тестирования торговых стратегий
 
-Automated quantitative trading strategy research and execution platform
-for RU derivatives (futures) with a "combine" (supervisor) that runs a
-live paper-trading portfolio loop.
+> Простыми словами: это система, которая **сама придумывает, проверяет и отбирает торговые стратегии**
+> на российских фьючерсах, следит за рисками и торгует ими на виртуальном (бумажном) счёте.
+> Проект живёт и развивается, код написан и поддерживается с помощью **AI-агентов для разработки**.
 
-This repository contains the code and architecture only. All secrets,
-API tokens, broker credentials, and private runtime data are intentionally
-excluded.
+---
 
-## Overview
+## 1. О чём проект (для человека без контекста трейдинга)
 
-- **Supervisor / combine loop** (`core/supervisor.py`) — orchestrates the
-  live portfolio: pulls intraday signals, allocates slots, enforces risk
-  limits, and runs paper trades.
-- **Strategy research pipeline** (`engines/`, `core/research`) — systematic
-  generation, backtesting, and qualification of strategies (walk-forward,
-  cross-validation, mechanism validation).
-- **Risk & allocation** (`core/risk.py`, `code/risk_scorecard.py`) — slot
-  budgeting, drawdown limits, signal pool governance, portfolio enforcer.
-- **Multi-timeframe features** (`code/multi_tf_*.py`) — feature generation
-  across timeframes feeding the scoring pipeline.
-- **Certification & audit** (`core/system_certification.py`, `code/daily_audit*.py`)
-  — automated proof chains, secret redaction checks, and daily audit reports.
-- **Tests** (`tests/`, `code/test_*.py`) — unit + integration + dry-run
-  validation.
+Трейдеры тратят месяцы на то, чтобы найти хоть одну прибыльную торговую стратегию.
+Этот проект автоматизирует весь этот процесс:
 
-## Layout
+1. **Генератор** — каждую ночь придумывает новые торговые стратегии (комбинации
+   индикаторов, таймфреймов, правил входа/выхода) для актуальных рыночных условий.
+2. **Реестр стратегий** — хранит все созданные стратегии, их статус и историю.
+3. **Проверка качества** — каждая стратегия проходит строгие тесты: backtest на исторических
+   данных, walk-forward (проверка на «невиданных» данных), лимиты просадки и частоты сделок.
+4. **Риск-менеджер** — решает, какие стратегии выходят в портфель, когда выкинуть убыточную
+   и заменить её более сильной. Торговля ведётся на **бумажном счёте** (без реальных денег).
+5. **Супервизор (сам «комбайн»)** — оркестратор, который гоняет весь контур: сигналы →
+   распределение по слотам → исполнение → аналитика → обратная связь в генератор.
 
-- `core/` — runtime engine, supervisor, risk, registry, certification
-- `code/` — strategy generation, scoring, scorecards, live dashboards
-- `engines/` — strategy mechanisms and backtest engines
-- `tools/` — data backfill, MOEX downloads, meta-labeling, analysis
-- `tests/` — test suite and dry-run fixtures
-- `docs/` — architecture notes and mission-control reviews
+Петля замкнута: аналитика каждого дня **кормит генератор** — система учится на своих ошибках
+и учитывает текущий режим рынка (тренд/флэт/волатильность).
 
-## Running
+## 2. Агентный подход (главное — как это построено)
 
-Secrets are loaded from environment / a local token file (not committed).
-The full live setup requires broker access and is not runnable from this
-repo alone by design.
+Проект — это практическая демонстрация **инженерии с AI-агентами**:
 
-```bash
-pip install -r requirements.txt   # see docs for pinned deps
-pytest
+- **Внутри системы** работают агенты-исследователи (архитектор → кодер → тестировщик),
+  которые автономно генерируют и валидируют новые стратегии (`core/agent_orchestration.py`,
+  `core/layered_agent_orchestrator.py`, `core/autonomous_runner.py`).
+- **Снаружи** весь код этого репозитория создавался и поддерживается AI-кодинг-агентами под
+  моим руководством: разбивка задач, контроль качества, проверка каждой итерации.
+- Есть **автопилот исследователя** (`code/strategy_architect_autopilot.py`), который сам
+  ведёт итерации генерации стратегий и публикует вердикты.
+- Встроены **proof-цепочки и сертификация** (`core/system_certification.py`) — система сама
+  проверяет, что в логах нет секретов, а тесты и аудиты проходят.
+
+## 3. Что в коде (масштаб)
+
+| Блок | Что делает |
+|---|---|
+| `core/` | Движок, супервизор, риск-менеджмент, реестр, оркестрация агентов, сертификация |
+| `code/` | Генерация стратегий, скоринг, скоринг-карты, live-дашборды, аудиты |
+| `engines/` | 54 механизма стратегий и бэктест-движки (включая генетические и нейро) |
+| `tools/` | Загрузка данных (MOEX), мета-лейблинг, анализ, рендеринг отчётов |
+| `tests/` | 175 тестов: unit + интеграционные + dry-run проверки |
+
+## 4. Какие навыки видны из проекта
+
+- **Python**: асинхронные пайплайны, оркестрация агентов, чистые модульные границы.
+- **Инженерия**: архитектура с разделением на домены, контракты между модулями,
+  миграции данных, обратная совместимость.
+- **Надёжность**: риск-контроли, лимиты просадки, авто-замена стратегий, аудиты и
+  сертификация, секреты только через окружение (в репозитории их нет).
+- **Проверяемость**: walk-forward, backtest, dry-run режимы, 175 тестов, CI-подобные проверки.
+- **Работа с AI-агентами**: декомпозиция задач, постановка контрактов для агентов,
+  контроль качества итераций, документирование для машинного чтения (`AGENTS.md`, `ARCHITECTURE.md`).
+
+## 5. Структура репозитория
+
 ```
+core/    — движок, супервизор, риск, реестр, агентная оркестрация
+code/    — генерация стратегий, скоринг, live-дашборды
+engines/ — механизмы стратегий и бэктест-движки
+tools/   — данные, мета-лейблинг, анализ
+tests/   — тесты и dry-run фикстуры
+docs/    — архитектурные заметки
+```
+
+Подробности — в `ARCHITECTURE.md`, краткий старт — в `START.md`.
+
+## 6. Безопасность и прозрачность
+
+- Торговля ведётся на **бумажном счёте**; ключи брокера и API-токены **никогда не хранятся
+  в репозитории** — только через переменные окружения.
+- В публичной версии намеренно исключены приватные данные: базы аналитики, состояние
+  портфеля, отчёты, реальные ключи.
+
+---
+
+*Проект создан как демонстрация умения строить сложные автономные системы с помощью
+современных AI-кодинг-агентов.*
