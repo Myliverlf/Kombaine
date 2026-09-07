@@ -1,0 +1,54 @@
+{
+  "enabled": true,
+  "mode": "paper_backtest_only",
+  "live_orders_allowed": false,
+  "target_universe_size": 20,
+  "current_baseline_universe": ["BR", "GAZP", "LKOH", "SBER", "Si"],
+  "excluded": ["RI"],
+  "timeframes": ["15m", "1h"],
+  "frequency_policy": {
+    "increase_frequency_by": "more_assets_and_more_independent_strategies",
+    "do_not_lower_quality_gate": true,
+    "rare_high_quality_signals_are_ok": true
+  },
+  "strategy_policy": {
+    "prefer": [
+      "simple robust strategies",
+      "regime-specific strategies",
+      "indicator fusion",
+      "multi-timeframe confirmation",
+      "asset-specific edges"
+    ],
+    "reject": [
+      "no backtest trades",
+      "negative expectancy",
+      "overfit",
+      "too few trades without retest plan",
+      "risk veto unless explicitly documented"
+    ]
+  },
+  "minimum_report_fields": [
+    "ticker",
+    "strategy",
+    "timeframe",
+    "trades",
+    "wins",
+    "losses",
+    "win_rate",
+    "total_pnl",
+    "avg_trade",
+    "profit_factor",
+    "max_drawdown",
+    "sharpe",
+    "walk_forward_stability",
+    "overfit_score",
+    "risk_verdict",
+    "decision"
+  ],
+  "resource_limits": {
+    "max_parallel_backtests": 2,
+    "max_parallel_agents": 1,
+    "memory_guard_gb": 6,
+    "no_gpu_required": true
+  }
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 45,
+    "slot_id": "slot_GAZP_dup_a",
+    "ticker": "GAZP",
+    "direction": "SHORT",
+    "contracts": 1,
+    "entry_price": 82.78,
+    "status": "open"
+  },
+  {
+    "id": 99,
+    "slot_id": "slot_ORPHAN_1",
+    "ticker": "LKOH",
+    "direction": "LONG",
+    "contracts": 1,
+    "entry_price": 42585.0,
+    "status": "open"
+  }
+]

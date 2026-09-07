@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.codegraph/
+.venv*/
+state/
+reports/
+artifacts/
+backups/
+*.db
+*.db-*
+*.sqlite
+config.json
+.env

@@ -1,0 +1,75 @@
+[
+  {
+    "name": "all_pass",
+    "description": "All candidates above threshold, no excluded tickers",
+    "gate_candidates": [
+      {"ticker": "Si", "composite_score": 75.0, "contracts": 1},
+      {"ticker": "LKOH", "composite_score": 65.0, "contracts": 1},
+      {"ticker": "GAZP", "composite_score": 58.0, "contracts": 1}
+    ],
+    "gate_config": {
+      "min_composite_score": 50.0,
+      "max_slots": 3,
+      "max_contracts_per_entry": 1,
+      "excluded": ["RI"]
+    },
+    "expected_n_passed": 3,
+    "expected_n_rejected": 0,
+    "expected_passed_tickers": ["Si", "LKOH", "GAZP"]
+  },
+  {
+    "name": "ri_excluded",
+    "description": "RI ticker in candidates must be excluded",
+    "gate_candidates": [
+      {"ticker": "Si", "composite_score": 75.0, "contracts": 1},
+      {"ticker": "RI", "composite_score": 90.0, "contracts": 1}
+    ],
+    "gate_config": {
+      "min_composite_score": 50.0,
+      "max_slots": 3,
+      "max_contracts_per_entry": 1,
+      "excluded": ["RI"]
+    },
+    "expected_n_passed": 1,
+    "expected_n_rejected": 1,
+    "expected_passed_tickers": ["Si"],
+    "expected_rejected_reason_fragment": "excluded_ticker:RI"
+  },
+  {
+    "name": "threshold_rejection",
+    "description": "Some candidates below composite_score threshold",
+    "gate_candidates": [
+      {"ticker": "Si", "composite_score": 75.0, "contracts": 1},
+      {"ticker": "LKOH", "composite_score": 30.0, "contracts": 1},
+      {"ticker": "GAZP", "composite_score": 10.0, "contracts": 1}
+    ],
+    "gate_config": {
+      "min_composite_score": 50.0,
+      "max_slots": 3,
+      "max_contracts_per_entry": 1,
+      "excluded": ["RI"]
+    },
+    "expected_n_passed": 1,
+    "expected_n_rejected": 2,
+    "expected_passed_tickers": ["Si"]
+  },
+  {
+    "name": "max_slots_cap",
+    "description": "More than max_slots candidates pass threshold — only top max_slots survive",
+    "gate_candidates": [
+      {"ticker": "Si", "composite_score": 90.0, "contracts": 1},
+      {"ticker": "LKOH", "composite_score": 85.0, "contracts": 1},
+      {"ticker": "GAZP", "composite_score": 80.0, "contracts": 1},
+      {"ticker": "SBRF", "composite_score": 70.0, "contracts": 1}
+    ],
+    "gate_config": {
+      "min_composite_score": 50.0,
+      "max_slots": 3,
+      "max_contracts_per_entry": 1,
+      "excluded": ["RI"]
+    },
+    "expected_n_passed": 3,
+    "expected_n_rejected": 1,
+    "expected_passed_tickers": ["Si", "LKOH", "GAZP"]
+  }
+]

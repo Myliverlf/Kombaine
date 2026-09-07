@@ -1,0 +1,16 @@
+venv/
+.venv-timesfm/
+__pycache__/
+.pytest_cache/
+node_modules/
+.hermes/
+.git/
+*.pyc
+*.db
+state/
+backups/
+reports/
+tmp-*/
+.tmp_*/
+config/
+docs/

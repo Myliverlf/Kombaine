@@ -1,0 +1,103 @@
+{
+  "_description": "Mock data for forecast_scorecard_bridge tests. Returns arrays, ForecastContext-compatible dicts, config weights.",
+
+  "returns_healthy": [0.01, 0.005, -0.003, 0.008, 0.012, -0.001, 0.004, 0.006, -0.002, 0.003],
+  "returns_degraded": [-0.02, -0.015, -0.01, 0.002, -0.03, -0.025, -0.01, 0.001],
+  "returns_dead": [-0.05, -0.04, -0.03, -0.06, -0.02, -0.07, -0.04, -0.03],
+  "returns_flat": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+
+  "context_high_confidence": {
+    "per_ticker": {
+      "Si": {
+        "direction": "up",
+        "ci_width": 0.015,
+        "confidence": 0.85,
+        "horizon": 20,
+        "source": "timesfm"
+      }
+    },
+    "portfolio_bias": "up",
+    "volatility_regime": "calm",
+    "confidence_score": 0.85,
+    "meta": {
+      "tickers_with_signal": 1,
+      "tickers_no_signal": 0,
+      "avg_ci_width": 0.015,
+      "n_tickers": 1
+    }
+  },
+
+  "context_low_confidence": {
+    "per_ticker": {
+      "Si": {
+        "direction": "flat",
+        "ci_width": 0.12,
+        "confidence": 0.15,
+        "horizon": 20,
+        "source": "dummy"
+      }
+    },
+    "portfolio_bias": "flat",
+    "volatility_regime": "volatile",
+    "confidence_score": 0.15,
+    "meta": {
+      "tickers_with_signal": 0,
+      "tickers_no_signal": 1,
+      "avg_ci_width": 0.12,
+      "n_tickers": 1
+    }
+  },
+
+  "context_ri_excluded": {
+    "per_ticker": {
+      "RI": {
+        "direction": "up",
+        "ci_width": 0.02,
+        "confidence": 0.9,
+        "horizon": 20,
+        "source": "timesfm"
+      }
+    },
+    "portfolio_bias": "up",
+    "volatility_regime": "calm",
+    "confidence_score": 0.9,
+    "meta": {
+      "tickers_with_signal": 1,
+      "tickers_no_signal": 0,
+      "avg_ci_width": 0.02,
+      "n_tickers": 1
+    }
+  },
+
+  "slots": [
+    {
+      "ticker": "Si",
+      "score": 8.0,
+      "direction": "LONG",
+      "slot_score": 7.5,
+      "risk_penalty": 0.1
+    },
+    {
+      "ticker": "BR",
+      "score": 6.5,
+      "direction": "SHORT",
+      "slot_score": 6.0,
+      "risk_penalty": 0.15
+    }
+  ],
+
+  "config": {
+    "max_slots": 3,
+    "max_contracts_per_entry": 1,
+    "excluded": ["RI"],
+    "risk_scorecard_weights": {
+      "exposure": 20,
+      "drawdown": 20,
+      "volatility": 15,
+      "correlation": 10,
+      "signal_age": 15,
+      "slots": 10,
+      "caps": 10
+    }
+  }
+}

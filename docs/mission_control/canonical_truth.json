@@ -1,0 +1,273 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "contract_id": "CANONICAL_TRUTH_V1",
+  "version": "1.0.0",
+  "created_at": "2026-08-30",
+  "purpose": "Machine-readable truth contract defining canonical hierarchy, immutable invariants, and sole-writable sources for strategy_combine. Replaces ambiguous prose documentation.",
+  "immutable": true,
+  "truth_hierarchy": {
+    "level_1_master_governance": {
+      "doc": "docs/mission_control/MASTER_CHARTER.md",
+      "role": "Long-term architecture north star and governance layer",
+      "can_supersede": "never",
+      "authority": "CONSTITUTION"
+    },
+    "level_2_current_system_truth": {
+      "doc": "docs/COMBINE_SYSTEM_ARCHITECTURE.md",
+      "role": "Currently known architecture, factual implementation state, gaps, safety constraints",
+      "can_supersede": "runtime/code/broker evidence can supersede stale factual statements, but contradictions must be documented",
+      "authority": "FACTUAL",
+      "note": "ARCHITECTURE.md and ../ARCHITECTURE.md are NON-CANONICAL if edited"
+    },
+    "level_3_accepted_decisions": {
+      "doc": "docs/mission_control/decisions/ADR-*.md",
+      "role": "Accepted architectural decisions",
+      "authority": "DECISIONAL"
+    },
+    "level_4_mission_control_state": {
+      "docs": [
+        "docs/mission_control/01_SYSTEM_MAP.md",
+        "docs/mission_control/02_SOURCE_OF_TRUTH.md",
+        "docs/mission_control/08_TECH_DEBT_REGISTER.md",
+        "docs/mission_control/09_ROADMAP.md",
+        "docs/mission_control/10_MATURITY_MODEL.md"
+      ],
+      "authority": "OPERATIONAL"
+    },
+    "level_5_iteration_directives": {
+      "doc": "HERMES_MISSION_CONTROL_XX_*.md",
+      "role": "Bounded development authorization",
+      "authority": "BOUNDARY"
+    },
+    "level_6_evidence": {
+      "docs": [
+        "tests",
+        "runtime verification",
+        "broker read-only evidence",
+        "logs"
+      ],
+      "authority": "VERIFICATION"
+    }
+  },
+  "canonical_state_stores": {
+    "strategy_registry": {
+      "path": "state/strategy_registry.json",
+      "sole_writer": [
+        "core/strategy_registry.py",
+        "code/strategy_registry.py"
+      ],
+      "derived_views": [
+        "state/waitlist.json",
+        "state/signal_pool.json"
+      ],
+      "role": "CANONICAL SOURCE OF TRUTH for all strategy state",
+      "writable_by": "seeder_registry module only",
+      "read_by": [
+        "supervisor",
+        "signal_pool",
+        "risk_manager",
+        "control_plane"
+      ],
+      "type": "mutable"
+    },
+    "portfolio": {
+      "path": "state/portfolio.json",
+      "sole_writer": [
+        "core/supervisor.py",
+        "core/engine.py"
+      ],
+      "role": "Active slots and positions",
+      "type": "mutable"
+    },
+    "config": {
+      "path": "config.json",
+      "sole_writer": [
+        "human operator (manual edit)"
+      ],
+      "role": "Runtime configuration — mode, risk limits, universe",
+      "type": "mutable_requires_human"
+    },
+    "strategy_lifecycle_db": {
+      "path": "state/strategy_lifecycle.db",
+      "sole_writer": [
+        "core/strategy_lifecycle.py"
+      ],
+      "role": "Decay detection and lifecycle state",
+      "type": "mutable"
+    },
+    "experiment_memory_db": {
+      "path": "state/experiment_memory.db",
+      "sole_writer": [
+        "core/experiment_memory.py"
+      ],
+      "role": "Experiment identity and classification",
+      "type": "mutable"
+    },
+    "research_knowledge_db": {
+      "path": "state/research_knowledge.db",
+      "sole_writer": [
+        "core/research_knowledge.py"
+      ],
+      "role": "Evidence aggregation and findings",
+      "type": "mutable"
+    },
+    "analytics_db": {
+      "path": "state/analytics.db",
+      "sole_writer": [
+        "core/analytics.py",
+        "core/execution_journal.py"
+      ],
+      "role": "Trade analytics and execution intents",
+      "type": "mutable"
+    },
+    "mission_control_db": {
+      "path": "state/mission_control.db",
+      "sole_writer": [
+        "core/mission_control.py"
+      ],
+      "role": "Control plane state — incidents, tasks, decisions",
+      "type": "mutable"
+    },
+    "production_truth_db": {
+      "path": "state/production_truth.db",
+      "sole_writer": [
+        "core/production_truth.py"
+      ],
+      "role": "Data integrity and broker reconciliation",
+      "type": "mutable"
+    },
+    "system_certification_db": {
+      "path": "state/system_certification.db",
+      "sole_writer": [
+        "core/system_certification.py"
+      ],
+      "role": "Readiness evaluation state",
+      "type": "mutable"
+    }
+  },
+  "immutable_artifacts": {
+    "eligible_candidates": {
+      "pattern": "reports/strategy_architect/runs/{run_id}/eligible_candidates.json",
+      "immutable_after": "run finalize_eligible() completes",
+      "provenance_fields": [
+        "run_id",
+        "config_key",
+        "instrument",
+        "strategy",
+        "parameters",
+        "metrics"
+      ],
+      "module": "core/eligible_candidates_contract.py",
+      "note": "Once created, eligible_candidates.json MUST NOT be mutated. Any modification produces a new run_id."
+    },
+    "run_manifest": {
+      "pattern": "reports/strategy_architect/runs/{run_id}/manifest.json",
+      "immutable_after": "run.complete()",
+      "module": "core/run_contract.py"
+    },
+    "run_checks": {
+      "pattern": "reports/strategy_architect/runs/{run_id}/checks.json",
+      "immutable_after": "run.complete()",
+      "module": "core/run_contract.py"
+    },
+    "23e_artifacts": {
+      "pattern": "state/clean_qualification_campaign_23e_*",
+      "role": "Immutable history — 23E/23D artifacts",
+      "note": "NEVER modify these. They are audit trail."
+    },
+    "23d_artifacts": {
+      "pattern": "_tmp_23d_control.py",
+      "role": "Immutable history",
+      "note": "NEVER modify these."
+    }
+  },
+  "scheduler_ownership": {
+    "combine-research-daily.timer": {
+      "owner": "core/run_contract.py + code/strategy_architect_autopilot.py",
+      "scope": "daily canonical research runs",
+      "lock": "state/.research_run.lock",
+      "note": "ACTIVE timer. Old docs saying manual-only are stale — contradicted by actual systemd timer."
+    },
+    "combine-seeder.timer": {
+      "owner": "core/strategy_registry.py (seeder_registry)",
+      "scope": "seeder handoff and registry ingestion",
+      "lock": "none (atomic file write)"
+    },
+    "combine-supervisor.timer": {
+      "owner": "core/supervisor.py",
+      "scope": "supervision loop (signals → risk → execution → journal)",
+      "lock": "state/.supervisor.lock",
+      "mode_guard": "config.json mode/paper_first"
+    },
+    "manual_strategy_architect_launcher": {
+      "owner": "code/manual_strategy_architect_launcher.py",
+      "scope": "manual on-demand research runs",
+      "note": "explicit manual opt-in, same lock as daily"
+    },
+    "manual_seeder": {
+      "owner": "core/seeder_handoff.py",
+      "scope": "manual handoff from latest run to registry",
+      "note": "explicit manual invocation"
+    }
+  },
+  "mode_safety": {
+    "current_mode": "paper",
+    "current_paper_first": true,
+    "live_forbidden": true,
+    "live_authorization_requires": [
+      "config.json mode=live",
+      "config.json paper_first=false",
+      "human_operator explicit authorization",
+      "PAPER_QUALIFIED evidence for all candidates"
+    ],
+    "note": "This document does NOT authorize mode change. mode=paper, paper_first=true is enforced by runtime."
+  },
+  "invariants": [
+    "60d_only_cannot_reach_PAPER_ADMISSION_READY",
+    "thresholds_are_not_lowered_without_human_authorization",
+    "infrastructure_error_is_not_strategy_rejection",
+    "strategy_registry_json_is_sole_writable_truth_for_strategy_state",
+    "eligible_candidates_are_immutable_once_finalized",
+    "derived_views_waitlist_signal_pool_are_exported_NOT_written_directly",
+    "paper_mode_forbids_broker_write_calls",
+    "no_candidate_reaches_live_without_human_authorization",
+    "competing_architecture_docs_are_non_canonical"
+  ],
+  "pre_live_blockers": [
+    {
+      "id": "PLB-1",
+      "title": "Full consumer migration to registry API",
+      "status": "NOT_MIGRATED",
+      "description": "Some legacy consumers still read waitlist.json/signal_pool.json directly instead of using the registry API. Full migration is unsafe until all consumers are verified to use registry reads.",
+      "evidence": "module_contracts.py shows signal_pool module still writes waitlist.json/signal_pool.json as derived views"
+    },
+    {
+      "id": "PLB-2",
+      "title": "LIVE_RISK_V1 vs executable config drift",
+      "status": "DETECTED",
+      "description": "LIVE_RISK_V1.json exists in state/live_risk/ but risk thresholds in config.json may not be synchronized. Manual verification needed before live.",
+      "evidence": "state/live_risk/LIVE_RISK_V1.json exists alongside config.json risk section"
+    },
+    {
+      "id": "PLB-3",
+      "title": "Policy stage gating not enforced in code",
+      "status": "PARTIAL",
+      "description": "config/research_qualification_policy.json defines stage semantics but code does not yet gate on all stages programmatically. PAPER_ADMISSION_READY is not enforced as a hard check in the seeder handoff.",
+      "evidence": "seeder_handoff.py does not load or enforce research_qualification_policy.json stages"
+    },
+    {
+      "id": "PLB-4",
+      "title": "Universal scheduler timer active while old docs say manual-only",
+      "status": "RESOLVED_IN_THIS_DOCUMENT",
+      "description": "combine-research-daily.timer is active. Old ARCHITECTURE.md docs say manual-only. canonical_truth.json resolves this contradiction by declaring timer ownership.",
+      "evidence": "scheduler_ownership section above"
+    }
+  ],
+  "canonical_architecture": "docs/COMBINE_SYSTEM_ARCHITECTURE.md",
+  "canonical_qualification_policy": "config/research_qualification_policy.json",
+  "canonical_risk_policy": "state/live_risk/LIVE_RISK_V1.json",
+  "canonical_horizon_policy": "core/horizon_resolution.py",
+  "canonical_handoff": "reports/strategy_architect/runs/{run_id}/eligible_candidates.json",
+  "canonical_registry": "state/strategy_registry.json",
+  "canonical_research_scheduler": "combine-research-daily.timer"
+}

@@ -1,0 +1,27 @@
+{
+  "deposit_rub": 21281,
+  "risk_per_trade_pct": 2.7,
+  "slots": {
+    "GAZP_trend_001": {
+      "ticker": "GAZP",
+      "strategy": "trend_follow",
+      "direction": "LONG",
+      "contracts": 1,
+      "go_rub": 574.59,
+      "entry_price": 185.20,
+      "status": "active"
+    },
+    "SBER_mrev_002": {
+      "ticker": "SBER",
+      "strategy": "mean_revert",
+      "direction": "LONG",
+      "contracts": 1,
+      "go_rub": 574.59,
+      "entry_price": 287.30,
+      "status": "active"
+    }
+  },
+  "max_slots": 3,
+  "max_contracts_per_entry": 1,
+  "excluded": ["RI"]
+}

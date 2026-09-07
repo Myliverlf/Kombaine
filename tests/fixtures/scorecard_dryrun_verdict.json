@@ -1,0 +1,122 @@
+{
+  "timestamp": "2026-09-05T09:07:17.471639+00:00",
+  "data_source": "real",
+  "n_tickers_scored": 5,
+  "scorecard_scores": {
+    "BR": {
+      "composite_score": 0.345189,
+      "source": "real",
+      "expectancy_r": 0.005767,
+      "risk_penalty": 0.0203
+    },
+    "GAZP": {
+      "composite_score": 0.303599,
+      "source": "real",
+      "expectancy_r": -0.033724,
+      "risk_penalty": 0.095289
+    },
+    "LKOH": {
+      "composite_score": 0.347875,
+      "source": "real",
+      "expectancy_r": 0.013061,
+      "risk_penalty": 0.020807
+    },
+    "SBER": {
+      "composite_score": 0.240884,
+      "source": "real",
+      "expectancy_r": -0.031404,
+      "risk_penalty": 0.276963
+    },
+    "SI": {
+      "composite_score": 0.201851,
+      "source": "synthetic",
+      "expectancy_r": -0.072105,
+      "risk_penalty": 0.346419
+    }
+  },
+  "overall": {
+    "avg_composite": 0.28788,
+    "avg_expectancy_r": -0.023681,
+    "avg_risk_penalty": 0.151956
+  },
+  "constraints_pass": true,
+  "final_verdict": "PASS",
+  "n_pass": 12,
+  "n_fail": 0,
+  "n_warn": 0,
+  "n_skip": 0,
+  "checks": [
+    {
+      "check": "data_source",
+      "status": "PASS",
+      "detail": "source=real, n_csv_files=24"
+    },
+    {
+      "check": "load_BR",
+      "status": "PASS",
+      "detail": "source=real, rows=3384",
+      "source": "real",
+      "n_rows": 3384
+    },
+    {
+      "check": "load_GAZP",
+      "status": "PASS",
+      "detail": "source=real, rows=3397",
+      "source": "real",
+      "n_rows": 3397
+    },
+    {
+      "check": "load_LKOH",
+      "status": "PASS",
+      "detail": "source=real, rows=3375",
+      "source": "real",
+      "n_rows": 3375
+    },
+    {
+      "check": "load_SBER",
+      "status": "PASS",
+      "detail": "source=real, rows=3265",
+      "source": "real",
+      "n_rows": 3265
+    },
+    {
+      "check": "load_Si",
+      "status": "PASS",
+      "detail": "source=synthetic, rows=200",
+      "source": "synthetic",
+      "n_rows": 200
+    },
+    {
+      "check": "synthetic_fallback",
+      "status": "PASS",
+      "detail": "source=synthetic, rows=200"
+    },
+    {
+      "check": "ri_excluded",
+      "status": "PASS",
+      "detail": "RI correctly rejected: Ticker 'RI' is in excluded list: ['RI']. Will not load data."
+    },
+    {
+      "check": "scorecard_compute",
+      "status": "PASS",
+      "detail": "scored=5, ranked=['LKOH', 'BR', 'GAZP', 'SBER', 'SI']",
+      "constraints_pass": true,
+      "violations": []
+    },
+    {
+      "check": "score_range",
+      "status": "PASS",
+      "detail": "All 5 scores in ~[0,1]"
+    },
+    {
+      "check": "no_live_orders",
+      "status": "PASS",
+      "detail": "mode=paper (paper mode, no live orders)"
+    },
+    {
+      "check": "config_limits",
+      "status": "PASS",
+      "detail": "max_slots<=3, max_contracts=1, RI excluded"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "iteration": 21,
+  "date": "2026-08-30",
+  "status": "CONDITIONALLY_READY",
+  "certification_run_id": "cert_20260830T042146Z_888c0033",
+  "evidence_hash": "edfafc9c03b72777",
+  "tests": {
+    "total": 84,
+    "passed": 84,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "gates": {
+    "total": 12,
+    "passed": 11,
+    "warn": 1,
+    "failed": 0
+  },
+  "proof_chains": {
+    "total": 24,
+    "passed": 23,
+    "failed": 1
+  },
+  "chaos_tests": {
+    "total": 15,
+    "survived": 15,
+    "failed": 0
+  },
+  "restrictions": [
+    "Data gaps: BR_1095d_15m, BR_1095d_1h, Si_365d_1h, Si_1095d_15m, Si_1095d_1h",
+    "Data freshness: 60d files stale (>7 days)",
+    "Broker credentials: READ access only; paper mode VETO blocks live orders",
+    "No Telegram forwarding configured/active",
+    "No broker reconciliation performed against live Tinkoff API",
+    "No live data backfill capability"
+  ],
+  "safety_invariants": {
+    "mode_paper": true,
+    "paper_first_true": true,
+    "zero_broker_mutation": true,
+    "risk_manager_active": true,
+    "human_governance_required": true,
+    "live_not_activated": true
+  },
+  "files_created": [
+    "core/system_certification.py",
+    "tests/test_system_certification.py",
+    "docs/mission_control/decisions/ADR-2026-08-30-end-to-end-certification-live-readiness.md",
+    "docs/mission_control/reviews/ITERATION-21/REVIEW.md",
+    "docs/mission_control/reviews/ITERATION-21/EVIDENCE.md",
+    "docs/mission_control/reviews/ITERATION-21/FAILURE_MATRIX.md",
+    "docs/mission_control/reviews/ITERATION-21/evidence_bundle.json"
+  ],
+  "files_modified": [
+    "docs/01_SYSTEM_MAP.md",
+    "docs/02_SOURCE_OF_TRUTH.md",
+    "docs/08_TECH_DEBT_REGISTER.md",
+    "docs/09_ROADMAP.md",
+    "docs/10_MATURITY_MODEL.md"
+  ]
+}

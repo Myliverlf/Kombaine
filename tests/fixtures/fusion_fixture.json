@@ -1,0 +1,70 @@
+{
+    "description": "Synthetic fixture for signal fusion tests. All data is fake.",
+    "ohlcv": {
+        "index": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+        "close": [100, 101, 102, 101, 100, 99, 98, 99, 100, 101, 102, 103, 102, 101, 100, 99, 98, 99, 100, 101],
+        "returns": [0, 0.01, 0.0099, -0.0098, -0.0099, -0.01, -0.0101, 0.0102, 0.0101, 0.01, 0.0099, 0.0098, -0.0097, -0.0098, -0.0099, -0.01, -0.0101, 0.0102, 0.0101, 0.01]
+    },
+    "signals": {
+        "sma_cross": [0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 1, 1],
+        "rsi_reversal": [0, 1, 1, 0, -1, -1, -1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 1, 0, 0],
+        "macd_trend": [0, 0, 1, 1, 1, -1, -1, 0, 0, 0, 1, 1, 1, -1, -1, 0, 0, 0, 1, 1],
+        "donchian_breakout": [0, 1, 0, 1, -1, -1, 0, 1, 1, 1, 0, 1, -1, -1, 0, -1, 0, 1, 1, 0],
+        "bollinger_reversion": [0, -1, 0, -1, 1, 1, 0, -1, -1, -1, 0, -1, 1, 1, 0, 1, 0, -1, -1, 0]
+    },
+    "rules": [
+        {
+            "strategies": ["sma_cross", "rsi_reversal"],
+            "method": "majority_vote",
+            "weights": {},
+            "threshold": 0.66
+        },
+        {
+            "strategies": ["sma_cross", "rsi_reversal", "macd_trend"],
+            "method": "unanimous",
+            "weights": {},
+            "threshold": 0.66
+        },
+        {
+            "strategies": ["sma_cross", "rsi_reversal", "donchian_breakout"],
+            "method": "weighted_average",
+            "weights": {"sma_cross": 2.0, "rsi_reversal": 1.0, "donchian_breakout": 1.0},
+            "threshold": 0.66
+        },
+        {
+            "strategies": ["sma_cross", "rsi_reversal", "macd_trend"],
+            "method": "threshold",
+            "weights": {},
+            "threshold": 0.66
+        }
+    ],
+    "expected_majority_2_of_3": {
+        "description": "majority_vote: at least 2 agree → direction; else 0",
+        "index": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+        "sma_cross": [0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 1, 1],
+        "rsi_reversal": [0, 1, 1, 0, -1, -1, -1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 1, 0, 0]
+    },
+    "expected_unanimous": {
+        "description": "unanimous: all must agree",
+        "strategies": ["sma_cross", "rsi_reversal", "macd_trend"],
+        "index": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+        "sma_cross": [0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 1, 1],
+        "rsi_reversal": [0, 1, 1, 0, -1, -1, -1, 0, 1, 1, 1, 0, -1, -1, -1, 0, 1, 1, 0, 0],
+        "macd_trend": [0, 0, 1, 1, 1, -1, -1, 0, 0, 0, 1, 1, 1, -1, -1, 0, 0, 0, 1, 1]
+    },
+    "ri_excluded_test": {
+        "description": "RI should be VETO'd in any composition",
+        "strategies": ["sma_cross", "RI", "rsi_reversal"],
+        "method": "majority_vote",
+        "ticker": "RI"
+    },
+    "config": {
+        "max_slots": 3,
+        "max_contracts_per_entry": 1,
+        "excluded": ["RI"],
+        "risk": {
+            "max_slots": 3,
+            "max_contracts_per_entry": 1
+        }
+    }
+}

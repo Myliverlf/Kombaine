@@ -1,0 +1,5 @@
+{
+  "combine-supervisor.timer": {"active": "inactive", "enabled": false},
+  "combine-15m.timer": {"active": "active", "enabled": true},
+  "combine-seeder.timer": {"active": "active", "enabled": true}
+}

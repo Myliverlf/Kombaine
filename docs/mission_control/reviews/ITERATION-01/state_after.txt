@@ -1,0 +1,7 @@
+{
+  "sha256": "37f739c97fdfbe0e0fc5119bfc2f0ef475eccf6e01f9ffb09ee6e993ac745acd",
+  "pending_slots": [],
+  "slots": [
+    "LKOH_volatility_squeeze_15m"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "ts": "2026-08-22T06:00:00+00:00",
+  "tickers": {
+    "GAZP": {"adx": 35.3, "direction": "up", "regime": "trend", "atr_pct": 0.299},
+    "SBER": {"adx": 18.0, "direction": "down", "regime": "range", "atr_pct": 0.183},
+    "BR": {"adx": 23.1, "direction": "up", "regime": "trend", "atr_pct": 0.279},
+    "LKOH": {"adx": 15.0, "direction": "down", "regime": "range", "atr_pct": 0.242},
+    "Si": {"adx": 27.0, "direction": "up", "regime": "trend", "atr_pct": 0.097}
+  },
+  "bias": "neutral",
+  "ups": 3,
+  "downs": 2,
+  "trend_cnt": 3
+}

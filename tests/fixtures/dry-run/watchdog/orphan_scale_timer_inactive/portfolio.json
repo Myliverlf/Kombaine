@@ -1,0 +1,55 @@
+{
+  "halted": true,
+  "halt_reason": "risk_guard_trip",
+  "peak_equity": 0.0,
+  "deposit_rub": 21281.0,
+  "slots": {
+    "slot_GAZP_dup_a": {
+      "ticker": "GAZP",
+      "strategy": "sma_cross",
+      "contracts": 1,
+      "go_rub": 1432.47,
+      "open_position": {
+        "direction": "SHORT",
+        "qty": 1,
+        "entry_price": 8278.0,
+        "trade_id": 45
+      },
+      "sl_px": 8325.0,
+      "tp_px": 8166.0,
+      "pnl_rub": 0.0,
+      "n_trades": 0,
+      "slot_id": "slot_GAZP_dup_a"
+    },
+    "slot_GAZP_dup_b": {
+      "ticker": "GAZP",
+      "strategy": "sma_cross_alt",
+      "contracts": 1,
+      "go_rub": 1432.47,
+      "open_position": {
+        "direction": "SHORT",
+        "qty": 1,
+        "entry_price": 82.78,
+        "trade_id": 46
+      },
+      "sl_px": 83.53,
+      "tp_px": 81.66,
+      "pnl_rub": 0.0,
+      "n_trades": 0,
+      "slot_id": "slot_GAZP_dup_b"
+    },
+    "slot_STALE_EMPTY": {
+      "ticker": "SBER",
+      "strategy": "mean_revert",
+      "contracts": 1,
+      "go_rub": 574.59,
+      "open_position": null,
+      "sl_px": 288.0,
+      "tp_px": 286.0,
+      "entry_price": null,
+      "pnl_rub": 0.0,
+      "n_trades": 0,
+      "slot_id": "slot_STALE_EMPTY"
+    }
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "policy_id": "RESEARCH_QUALIFICATION_V1",
+  "version": "1.0.0",
+  "effective_date": "2026-08-30",
+  "immutable": true,
+  "thresholds": {
+    "min_trades": 8,
+    "min_sharpe": 0.3,
+    "min_profit_factor": 1.05,
+    "max_drawdown_pct": 25.0,
+    "max_oos_degradation": 0.5,
+    "min_regime_span_days": 30
+  },
+  "cost_model": {
+    "commission_per_contract": 5.0,
+    "slippage_bps": 1.0,
+    "initial_cash": 1000000.0,
+    "source": "frozen research assumptions"
+  },
+  "stages": {
+    "DISCOVERY": {
+      "requires": [
+        "data_identity",
+        "single_backtest"
+      ],
+      "paper_admission": false
+    },
+    "BACKTEST_QUALIFIED": {
+      "requires": [
+        "min_trades",
+        "min_sharpe",
+        "min_profit_factor",
+        "max_drawdown",
+        "costs"
+      ],
+      "paper_admission": false
+    },
+    "MULTI_HORIZON_QUALIFIED": {
+      "requires": [
+        "60d",
+        "90d",
+        "180d",
+        "365d",
+        "1095d_or_explicit_downgrade"
+      ],
+      "paper_admission": false
+    },
+    "WALK_FORWARD_QUALIFIED": {
+      "requires": [
+        "oos_folds",
+        "no_lookahead"
+      ],
+      "paper_admission": false
+    },
+    "ROBUSTNESS_QUALIFIED": {
+      "requires": [
+        "parameter_neighborhood",
+        "temporal_regime"
+      ],
+      "paper_admission": false
+    },
+    "RISK_QUALIFIED": {
+      "requires": [
+        "LIVE_RISK_V1",
+        "bounded_stop",
+        "sizing",
+        "account_feasibility"
+      ],
+      "paper_admission": false
+    },
+    "PAPER_ADMISSION_READY": {
+      "requires": [
+        "BACKTEST_QUALIFIED",
+        "MULTI_HORIZON_QUALIFIED",
+        "WALK_FORWARD_QUALIFIED",
+        "ROBUSTNESS_QUALIFIED",
+        "RISK_QUALIFIED",
+        "no_genuine_paper_yet"
+      ],
+      "paper_admission": true
+    },
+    "PAPER_QUALIFIED": {
+      "requires": [
+        "PAPER_ADMISSION_READY",
+        "chronological_paper_evidence"
+      ],
+      "paper_admission": true
+    },
+    "LIVE_CANDIDATE": {
+      "requires": [
+        "PAPER_QUALIFIED",
+        "human_authorization_boundary"
+      ],
+      "paper_admission": false
+    }
+  },
+  "invariants": [
+    "60d_only_cannot_reach_PAPER_ADMISSION_READY",
+    "thresholds_are_not_lowered",
+    "infrastructure_error_is_not_strategy_rejection"
+  ],
+  "universe": [
+    "GAZP",
+    "SBER"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "halted": false,
+  "halt_reason": null,
+  "peak_equity": 21329.0,
+  "deposit_rub": 21281.0,
+  "slots": {
+    "slot_GAZP_56487": {
+      "ticker": "GAZP",
+      "strategy": "sma_cross",
+      "contracts": 1,
+      "go_rub": 1432.47,
+      "open_position": {
+        "direction": "SHORT",
+        "qty": 1,
+        "entry_price": 82.78,
+        "trade_id": 45
+      },
+      "sl_px": 83.53,
+      "tp_px": 81.66,
+      "pnl_rub": 0.0,
+      "n_trades": 0,
+      "slot_id": "slot_GAZP_56487"
+    },
+    "slot_LKOH_58402": {
+      "ticker": "LKOH",
+      "strategy": "vwap_bands",
+      "contracts": 1,
+      "go_rub": 7412.68,
+      "open_position": null,
+      "sl_px": null,
+      "tp_px": null,
+      "pnl_rub": 0.0,
+      "n_trades": 0,
+      "slot_id": "slot_LKOH_58402"
+    }
+  }
+}

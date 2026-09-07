@@ -1,0 +1,91 @@
+{
+  "ideas": [
+    {
+      "ticker": "GAZP",
+      "strategy_name": "ema_cross",
+      "direction": "LONG",
+      "win_rate": 0.6,
+      "avg_win": 200.0,
+      "avg_loss": 80.0,
+      "drawdown_pct": 3.0,
+      "volatility": 2.0,
+      "description": "Strong trend+up, good expectancy → should score HIGH"
+    },
+    {
+      "ticker": "BR",
+      "strategy_name": "ft_supertrend",
+      "direction": "LONG",
+      "win_rate": 0.55,
+      "avg_win": 180.0,
+      "avg_loss": 90.0,
+      "drawdown_pct": 5.0,
+      "volatility": 3.0,
+      "description": "Moderate trend, good metrics → should score MEDIUM-HIGH"
+    },
+    {
+      "ticker": "SBER",
+      "strategy_name": "bollinger_squeeze",
+      "direction": "SHORT",
+      "win_rate": 0.45,
+      "avg_win": 100.0,
+      "avg_loss": 120.0,
+      "drawdown_pct": 8.0,
+      "volatility": 5.0,
+      "description": "Range regime, poor metrics → should score LOW"
+    },
+    {
+      "ticker": "LKOH",
+      "strategy_name": "mean_reversion",
+      "direction": "LONG",
+      "win_rate": 0.35,
+      "avg_win": 60.0,
+      "avg_loss": 150.0,
+      "drawdown_pct": 12.0,
+      "volatility": 8.0,
+      "description": "Range, poor win_rate + high dd → should score VERY LOW"
+    },
+    {
+      "ticker": "RI",
+      "strategy_name": "ema_cross",
+      "direction": "LONG",
+      "win_rate": 0.6,
+      "avg_win": 200.0,
+      "avg_loss": 80.0,
+      "drawdown_pct": 2.0,
+      "volatility": 1.0,
+      "description": "RI is excluded → VETO, score = -inf"
+    }
+  ],
+  "regime_snapshot": {
+    "ts": "2026-08-22T06:00:00+00:00",
+    "tickers": {
+      "GAZP": {"adx": 35.3, "direction": "up", "regime": "trend", "atr_pct": 0.299},
+      "SBER": {"adx": 18.0, "direction": "down", "regime": "range", "atr_pct": 0.183},
+      "BR": {"adx": 23.1, "direction": "up", "regime": "trend", "atr_pct": 0.279},
+      "LKOH": {"adx": 15.0, "direction": "down", "regime": "range", "atr_pct": 0.242},
+      "Si": {"adx": 27.0, "direction": "up", "regime": "trend", "atr_pct": 0.097}
+    },
+    "bias": "neutral",
+    "ups": 3,
+    "downs": 2,
+    "trend_cnt": 3
+  },
+  "feedback": {
+    "LONG": {"pnl": -257},
+    "SHORT": {"pnl": 726},
+    "best_hours": [8, 7]
+  },
+  "config": {
+    "max_slots": 3,
+    "max_contracts_per_entry": 1,
+    "excluded": ["RI"]
+  },
+  "expectations": {
+    "gazp_higher_than_sber": true,
+    "ri_veto": true,
+    "filter_removes_weak": true,
+    "strong_ideas_count_above_threshold": 2,
+    "weak_ideas_count_below_threshold": 2,
+    "veto_count": 1
+  }
+}

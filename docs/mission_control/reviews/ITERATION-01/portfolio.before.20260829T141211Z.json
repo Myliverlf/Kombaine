@@ -1,0 +1,30 @@
+{
+  "slots": {
+    "LKOH_volatility_squeeze_15m": {
+      "ticker": "LKOH",
+      "strategy": "volatility_squeeze",
+      "timeframe": "15m",
+      "go_rub": 7955.45,
+      "pnl_rub": 2501.55,
+      "params": {
+        "bb_period": 14,
+        "bb_stds": 1.5,
+        "kc_period": 20,
+        "kc_mult": 1.5
+      },
+      "open_position": null,
+      "contracts": 1,
+      "promoted_ts": 1787643005.0,
+      "n_trades": 7,
+      "peak_pnl_rub": 1342.0,
+      "stop_streak": 0,
+      "last_signal_ts": 1787835608.1995845,
+      "slot_id": "LKOH_volatility_squeeze_15m",
+      "sl_px": 42931.42857142857,
+      "tp_px": 43897.857142857145
+    }
+  },
+  "peak_equity": 21944.0,
+  "halted": false,
+  "halt_reason": null
+}

@@ -1,0 +1,11 @@
+[
+  {
+    "id": 45,
+    "slot_id": "slot_GAZP_56487",
+    "ticker": "GAZP",
+    "direction": "SHORT",
+    "contracts": 1,
+    "entry_price": 82.78,
+    "status": "open"
+  }
+]
